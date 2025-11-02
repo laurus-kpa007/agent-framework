@@ -108,6 +108,7 @@ async def startup_event():
 async def shutdown_event():
     """Clean up resources on shutdown"""
     print("\nShutting down...")
+    await _mcp_manager.cleanup()
     await _ollama_service.close()
     print("✓ Cleanup complete")
 

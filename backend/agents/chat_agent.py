@@ -98,10 +98,26 @@ class ChatAgentManager:
 
 사용자가 "오늘", "지금", "현재" 등의 시간 관련 질문을 할 때 위 정보를 참고하세요."""
 
-        self.agent = self.client.create_agent(
-            name="OllamaAssistant",
-            instructions=instructions,
-        )
+        # Get MCP tools if available
+        tools = []
+        if self.mcp_manager:
+            mcp_tools = self.mcp_manager.get_tool_functions()
+            if mcp_tools:
+                tools = mcp_tools
+                print(f"✓ Loaded {len(tools)} MCP tools into agent")
+
+        # Create agent with tools
+        if tools:
+            self.agent = self.client.create_agent(
+                name="OllamaAssistant",
+                instructions=instructions,
+                tools=tools
+            )
+        else:
+            self.agent = self.client.create_agent(
+                name="OllamaAssistant",
+                instructions=instructions,
+            )
 
         self._initialized = True
 

@@ -9,7 +9,16 @@
       "Bash(del \"d:\\Python\\agent-framework\\backend\\services\\session_manager.py\" 2)",
       "Bash(if exist backendrouterssession.py del backendrouterssession.py)",
       "Bash(git init:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git reset:*)",
+      "Bash(git rm:*)",
+      "Bash(.gitignore)",
+      "Bash(git commit:*)",
+      "Bash(git config:*)",
+      "Bash(git remote:*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(python:*)"
     ],
     "deny": [],
     "ask": []
