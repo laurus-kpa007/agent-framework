@@ -1,0 +1,20 @@
+# Core Framework
+agent-framework
+
+# Web Framework
+fastapi>=0.115.0
+uvicorn[standard]>=0.32.0
+python-multipart>=0.0.12
+jinja2>=3.1.0
+
+# MCP Support
+mcp>=1.0.0
+
+# Utilities
+python-dotenv>=1.0.0
+pydantic>=2.10.0
+pydantic-settings>=2.6.0
+pyyaml>=6.0
+
+# HTTP Client
+httpx>=0.28.0

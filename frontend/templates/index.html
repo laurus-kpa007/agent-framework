@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>🤖 Ollama Agent Chat</h1>
+                <div class="header-actions">
+                    <div id="model-selector" class="model-selector">
+                        <button id="model-select-btn" class="model-select-btn" title="Select Model">
+                            <span id="current-model-name">No Model</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </button>
+                        <div id="model-dropdown" class="model-dropdown hidden">
+                            <div class="model-dropdown-header">
+                                <span>Available Models</span>
+                                <button id="refresh-models-btn" class="icon-btn" title="Refresh">🔄</button>
+                            </div>
+                            <div id="model-list" class="model-list">
+                                <div class="loading">Loading models...</div>
+                            </div>
+                        </div>
+                    </div>
+                    <span id="status-indicator" class="status-indicator">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Connecting...</span>
+                    </span>
+                    <a href="/mcp-settings" class="settings-btn" title="MCP Settings">⚙️ MCP</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Chat Container -->
+        <div class="chat-container">
+            <div id="chat-messages" class="chat-messages">
+                <!-- Welcome message -->
+                <div class="message assistant-message">
+                    <div class="message-content">
+                        <p>👋 안녕하세요! Ollama를 사용한 로컬 AI 어시스턴트입니다.</p>
+                        <p>무엇을 도와드릴까요?</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-area">
+                <div class="active-tools" id="active-tools">
+                    <span class="tools-label">Available Tools:</span>
+                    <span id="tools-list">Loading...</span>
+                </div>
+                <form id="chat-form" class="chat-form">
+                    <textarea
+                        id="message-input"
+                        class="message-input"
+                        placeholder="메시지를 입력하세요..."
+                        rows="1"
+                    ></textarea>
+                    <button type="submit" id="send-btn" class="send-btn">
+                        <span class="send-icon">📤</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/utils.js?v=7"></script>
+    <script src="/static/js/model-manager.js?v=7"></script>
+    <script src="/static/js/chat.js?v=7"></script>
+</body>
+</html>

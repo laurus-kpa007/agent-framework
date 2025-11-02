@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/components.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <a href="/" class="back-btn">← Back to Chat</a>
+                <h1>⚙️ MCP Server Settings</h1>
+            </div>
+        </header>
+
+        <!-- MCP Settings Container -->
+        <div class="settings-container">
+            <div class="settings-info">
+                <p>Model Context Protocol (MCP) servers provide additional tools and capabilities to the agent.</p>
+                <p>Enable or disable servers below. Configuration changes require a server restart.</p>
+            </div>
+
+            <!-- Servers List -->
+            <div id="servers-list" class="servers-list">
+                <div class="loading">Loading MCP servers...</div>
+            </div>
+
+            <!-- Server Configuration (Future) -->
+            <div class="add-server-section">
+                <h2>Add New MCP Server</h2>
+                <p class="info-text">This feature will be available in Phase 2</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/utils.js?v=4"></script>
+    <script src="/static/js/mcp-manager.js?v=4"></script>
+</body>
+</html>

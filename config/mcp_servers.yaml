@@ -1,0 +1,26 @@
+mcp_servers:
+  # Filesystem MCP Server - Local file operations
+  - name: "filesystem"
+    type: "stdio"
+    enabled: true
+    description: "Access and manipulate files in specified directories"
+    config:
+      command: "npx"
+      args:
+        - "-y"
+        - "@modelcontextprotocol/server-filesystem"
+        - "D:/Python/agent-framework"  # Allowed directory
+    env: {}
+
+  # GitHub MCP Server - GitHub API integration
+  - name: "github"
+    type: "stdio"
+    enabled: true
+    description: "Search and manage GitHub repositories, issues, and pull requests"
+    config:
+      command: "npx"
+      args:
+        - "-y"
+        - "@modelcontextprotocol/server-github"
+    env:
+      GITHUB_TOKEN: "${GITHUB_TOKEN}"  # Set this in your .env file
