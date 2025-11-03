@@ -9,12 +9,14 @@ from models.schemas import (
 )
 from services import OllamaService
 from agents import ChatAgentManager
+from mcp_integration import MCPManager
 
 router = APIRouter(prefix="/api/chat", tags=["chat"])
 
 # Global instances (will be initialized in main app)
 ollama_service: OllamaService = None
 chat_agent: ChatAgentManager = None
+mcp_manager: MCPManager = None
 
 
 def get_chat_agent() -> ChatAgentManager:
@@ -108,13 +110,20 @@ async def health_check(
     """Check health status of Ollama and agent"""
     ollama_connected = await service.check_connection()
 
+    # Get MCP tools count directly from MCP Manager
+    mcp_tools_count = 0
+    mcp_servers_enabled = 0
+    if mcp_manager:
+        mcp_tools_count = len(mcp_manager.get_available_tools())
+        mcp_servers_enabled = len(mcp_manager.get_enabled_servers())
+
     return HealthResponse(
         status="healthy" if ollama_connected else "degraded",
         ollama_connected=ollama_connected,
         ollama_model=service.get_current_model(),
         model_loaded=service.is_model_loaded(),
-        mcp_servers_count=0,  # Will be updated when MCP is integrated
-        active_tools_count=len(agent.get_active_tools()) if service.is_model_loaded() else 0
+        mcp_servers_count=mcp_servers_enabled,
+        active_tools_count=mcp_tools_count
     )
 
 

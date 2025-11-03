@@ -199,10 +199,10 @@ class ChatAgentManager:
 
     def get_active_tools(self) -> List[str]:
         """Get list of currently active tools"""
-        # Return enabled MCP server names
+        # Return actual tool names from MCP servers
         if self.mcp_manager:
-            enabled_servers = self.mcp_manager.get_enabled_servers()
-            return [server.name for server in enabled_servers]
+            available_tools = self.mcp_manager.get_available_tools()
+            return [tool["name"] for tool in available_tools]
         return []
 
     @property

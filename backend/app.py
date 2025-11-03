@@ -48,6 +48,7 @@ _chat_agent = ChatAgentManager(_ollama_service, lazy_init=True, mcp_manager=_mcp
 import routers.chat as chat_module
 chat_module.ollama_service = _ollama_service
 chat_module.chat_agent = _chat_agent
+chat_module.mcp_manager = _mcp_manager
 
 # Include routers
 app.include_router(chat_router)
