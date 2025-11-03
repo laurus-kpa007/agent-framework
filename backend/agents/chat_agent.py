@@ -90,13 +90,27 @@ class ChatAgentManager:
             "Sunday": "일요일"
         }
 
+        # Build tool descriptions for instructions
+        tool_descriptions = []
+        if self.mcp_manager:
+            mcp_tools_info = self.mcp_manager.get_available_tools()
+            for tool in mcp_tools_info[:20]:  # List first 20 tools
+                tool_descriptions.append(f"- {tool['name']}: {tool['description'][:100]}")
+
+        tool_list = "\n".join(tool_descriptions) if tool_descriptions else "없음"
+
         instructions = f"""당신은 유용한 AI 어시스턴트입니다. 항상 한국어로 답변하며, 간결하고 명확하게 응답하세요.
 
 현재 시간 정보:
 - 날짜 및 시간: {current_datetime}
 - 요일: {day_korean.get(current_day, current_day)}
 
-사용자가 "오늘", "지금", "현재" 등의 시간 관련 질문을 할 때 위 정보를 참고하세요."""
+사용자가 "오늘", "지금", "현재" 등의 시간 관련 질문을 할 때 위 정보를 참고하세요.
+
+사용 가능한 도구들:
+{tool_list}
+
+사용자의 요청을 해결하기 위해 필요하다면 위의 도구들을 적극적으로 활용하세요."""
 
         # Get MCP tools if available
         tools = []
@@ -105,6 +119,10 @@ class ChatAgentManager:
             if mcp_tools:
                 tools = mcp_tools
                 print(f"✓ Loaded {len(tools)} MCP tools into agent")
+
+        # Add example tools for testing
+        tools.extend([get_weather, calculate])
+        print(f"✓ Total tools loaded: {len(tools)}")
 
         # Create agent with tools
         if tools:
@@ -199,10 +217,11 @@ class ChatAgentManager:
 
     def get_active_tools(self) -> List[str]:
         """Get list of currently active tools"""
-        # Return enabled MCP server names
+        # Return list of actual tool names that were used in the last response
+        # For now, return all available tool names from MCP
         if self.mcp_manager:
-            enabled_servers = self.mcp_manager.get_enabled_servers()
-            return [server.name for server in enabled_servers]
+            all_tools = self.mcp_manager.get_available_tools()
+            return [tool["name"] for tool in all_tools[:10]]  # Limit to first 10 for display
         return []
 
     @property

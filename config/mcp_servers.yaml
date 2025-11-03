@@ -24,3 +24,15 @@ mcp_servers:
         - "@modelcontextprotocol/server-github"
     env:
       GITHUB_TOKEN: "${GITHUB_TOKEN}"  # Set this in your .env file
+
+  # Web Search MCP Server - Brave Search API integration
+  - name: "brave-search"
+    type: "stdio"
+    enabled: true
+    description: "Web Search and News Search"
+    config:
+      command: "node"
+      args:
+        - "D:\\Python\\mcp-server\\brave-search-mcp-server\\dist\\index.js"
+    env:
+      BRAVE_API_KEY: "${BRAVE_API_KEY}"  # Set this in your .env file
